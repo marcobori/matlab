@@ -2,7 +2,7 @@ clear
 B=[0,0; 77,68; 12,75; 32,17; 51,64; 20,19; 72,87; 80,37; 35,82;2,15; 18,90; 33,50; 85,52; 97,27; 37,67; 20,82; 49,0; 62,14; 7,60;100,100];
 popsize = 100;
 genum = 500;
-for h = 1:10
+for h = 1:5
 for i=1:popsize
     PermPop(i,:) = randperm(18);
 end
@@ -21,12 +21,20 @@ for gen = 1 : genum
     newpop = crosord(newpop,0);
     PermPop = [bestpop;newpop;oldpop];
 end
-Vysledok = [1,bestpop(1,:),20];
+res = [1,bestpop(1,:),20];
 min(fitness);
 hold on; 
 figure(1);%dlzka
 plot(graf);
-% 
+figure(2);
+hold on;
+X=[];Y=[];
+for i=1:20
+    x=B(res(i),1); y=B(res(i),2);
+    plot(x,y,'mo');
+    X=[X,x]; Y=[Y,y];
+end
+line(X,Y); 
 
 minim(h)=min(fitness);
 end
