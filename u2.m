@@ -2,7 +2,7 @@ clear
 B=[0,0; 77,68; 12,75; 32,17; 51,64; 20,19; 72,87; 80,37; 35,82;2,15; 18,90; 33,50; 85,52; 97,27; 37,67; 20,82; 49,0; 62,14; 7,60;100,100];
 popsize = 100;
 genum = 500;
-%tiledlayout(3,4)
+tiledlayout(3,4)
 for h = 1:10
 for i=1:popsize
     PermPop(i,:) = randperm(18);
@@ -22,11 +22,12 @@ for gen = 1 : genum
     newpop = swappart(newpop,0.1);
     PermPop = [bestpop;newpop;oldpop];
 end
+farba=round(rand(1,3),3);
 res = [1,bestpop(1,:),20];
 min(fitness);
 hold on; 
 figure(1);%dlzka
-plot(graf);
+plot(graf,'LineWidth',3,'color',farba);
 figure(2);
 hold on;
 X=[];Y=[];
@@ -36,7 +37,7 @@ for i=1:20
     plot(x,y,'ko',LineWidth=2);
     X=[X,x]; Y=[Y,y];
 end
-line(X,Y,'Linewidth',2,'color',round(rand(1,3),3)); 
+line(X,Y,'Linewidth',2,'color',farba); 
 
 minim(h)=min(fitness);
 nexttile
