@@ -1,0 +1,68 @@
+% Demo program na klasifikaciu predmetov skupiny A a B na základe vlastností V1 a V2 
+% NS má 2 vstupy veliciny V1,V2 o rozsahu 0-1 (0-100%) a 2 výstupy o rozsahu 0-1, 
+% kde hodnota 1.výstup prislúcha skupine A a  2. výstup skupine B
+
+echo on
+% vykreslenie bodov skupín
+
+h=figure;
+hold on
+A = importdata("databody.mat");
+% vstupné data pre NS
+V1=A.data1;
+V2=A.data2;
+V3=A.data3;
+V4=A.data4;
+V5=A.data5;
+X=[V1;V2;V3;V4;V5]';
+
+% výstupne data pre NS
+P=[ones(50,1) zeros(50,1) zeros(50,1) zeros(50,1) zeros(50,1);
+zeros(50,1) ones(50,1) zeros(50,1) zeros(50,1) zeros(50,1);
+zeros(50,1) zeros(50,1) ones(50,1) zeros(50,1) zeros(50,1);
+zeros(50,1) zeros(50,1) zeros(50,1) ones(50,1) zeros(50,1);
+zeros(50,1) zeros(50,1) zeros(50,1) zeros(50,1) ones(50,1)]';
+
+
+% vytvorenie struktury NS na klasifikaciu
+net = patternnet([16])
+
+% vsetky data pouzite na trenovanie
+net.divideFcn='dividerand';
+net.divideParam.trainRatio=0.8;
+net.divideParam.valRatio=0;
+net.divideParam.testRatio=0.2;
+
+net.trainParam.goal = 0.01;	    % Ukoncovacia podmienka na chybu SSE.
+net.trainParam.epochs = 200;  	    % Max. pocet trénovacích cyklov.
+net.trainParam.min_grad=1e-3;      % Ukoncovacia podmienka na min. gradient
+
+
+% trenovanie siete
+net = train(net,X,P);
+disp('---- stlac klavesu ----')
+pause
+
+% simulacia vystupu NS
+y = net(X);
+% vypocet chyby siete
+perf = perform(net,P,y)
+
+% priradenie vstupov do tried
+classes = vec2ind(y)
+disp('---- stlac klavesu ----')
+pause
+
+
+% testovacie data 5 skupina B a 5 skupina A
+X2=[0.3 0.3 0.3; 0.5 0.6 0.9; 0.1 0.2 0.4];
+
+% simulacia vystupu NS
+
+% simulacia vystupu NS
+% y2 = net(X2);
+% 
+% 
+% % priradenie vstupov do tried
+% classes2 = vec2ind(y2)
+% echo off
