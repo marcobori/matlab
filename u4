@@ -35,7 +35,7 @@ net.divideParam.testRatio=0.2;
 
 net.trainParam.goal = 0.01;	    % Ukoncovacia podmienka na chybu SSE.
 net.trainParam.epochs = 200;  	    % Max. pocet trénovacích cyklov.
-net.trainParam.min_grad=1e-3;      % Ukoncovacia podmienka na min. gradient
+net.trainParam.min_grad=1e-20;      % Ukoncovacia podmienka na min. gradient
 
 
 % trenovanie siete
