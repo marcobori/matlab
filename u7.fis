@@ -1,0 +1,69 @@
+[System]
+Name='u7'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=22
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='vzdelanie'
+Range=[0 1]
+NumMFs=3
+MF1='malo':'trimf',[-0.204 0.00193 0.336545875096376]
+MF2='dost':'trimf',[0.25 0.5 0.7]
+MF3='vela':'trimf',[0.531611410948342 1 1.19]
+
+[Input2]
+Name='prax'
+Range=[0 1]
+NumMFs=3
+MF1='0':'trimf',[-0.208 -0.00197 0.395142636854279]
+MF2='(0;5)':'trimf',[0.3 0.565535851966075 0.7]
+MF3='5+':'trimf',[0.539321511179645 0.997 1.1]
+
+[Input3]
+Name='pohovor'
+Range=[0 1]
+NumMFs=3
+MF1='zle':'trimf',[-0.0678 -0.0027 0.203932151117964]
+MF2='dostatocne':'trimf',[0.101 0.612567463377024 0.899]
+MF3='dobre':'trimf',[0.600231303006939 1 1.2]
+
+[Output1]
+Name='vyhodnotenie'
+Range=[0 1]
+NumMFs=4
+MF1='neprijaty':'trimf',[0.000386 0.131457208943716 0.232]
+MF2='prijaty_na_horsie':'trimf',[0.103 0.312 0.51984126984127]
+MF3='prijaty':'trimf',[0.273809523809524 0.667 0.899]
+MF4='prijaty_na_lepsie':'trimf',[0.799602929838088 0.896602929838088 0.994602929838088]
+
+[Rules]
+1 1 0, 1 (1) : 1
+0 1 1, 1 (1) : 1
+3 3 3, 4 (1) : 1
+3 1 3, 3 (1) : 1
+2 2 2, 3 (1) : 1
+3 1 1, 2 (1) : 1
+3 1 2, 3 (1) : 1
+2 2 1, 2 (1) : 1
+1 3 3, 4 (1) : 1
+0 0 1, 1 (1) : 1
+0 1 0, 1 (1) : 1
+0 3 0, 3 (1) : 1
+0 2 0, 3 (1) : 1
+1 1 2, 2 (1) : 1
+1 1 1, 1 (1) : 1
+2 3 3, 4 (1) : 1
+0 3 3, 4 (1) : 1
+0 2 3, 3 (1) : 1
+0 3 0, 3 (1) : 1
+2 3 1, 3 (1) : 1
+2 2 1, 2 (1) : 1
+0 2 1, 2 (1) : 1
